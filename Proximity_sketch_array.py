@@ -1,14 +1,15 @@
 from machine import Pin
 import utime
-import pimoroni_pico_unicorn as unicorn  # Make sure this library is installed
+from picounicorn import PicoUnicorn
 
 # Initialize Unicorn Pack
-unicorn.init()
-width, height = unicorn.get_shape()
+unicorn = PicoUnicorn()  # Create an instance of PicoUnicorn
+width = 16
+height = 7
 
 # Initialize HC-SR04 sensor pins
-trig_pin = Pin(14, Pin.OUT)
-echo_pin = Pin(15, Pin.IN)
+trig_pin = Pin(27, Pin.OUT)
+echo_pin = Pin(28, Pin.IN)
 
 # Function to measure distance
 def measure_distance():
@@ -32,10 +33,3 @@ def update_led_brightness(distance):
         for x in range(width):
             unicorn.set_pixel(x, y, 255, 105, 180, brightness)  # Example: pink color, modify as needed
     unicorn.show()
-
-# Main loop
-while True:
-    distance = measure_distance()
-    update_led_brightness(distance)
-    print("Distance:", distance, "cm")
-    utime.sleep(0.1)
