@@ -65,3 +65,6 @@ while True:
         set_brightness(0)  # Off
         
     utime.sleep(0.1)
+
+# issues with color
+    
