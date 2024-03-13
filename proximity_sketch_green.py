@@ -2,7 +2,7 @@ from machine import Pin, PWM
 import utime
 
 # HC-SR04 setup
-trig_pin = Pin(28, Pin.OUT)
+trig_pin = Pin(28 , Pin.OUT)
 echo_pin = Pin(27, Pin.IN)
 
 def measure_distance():
@@ -26,8 +26,8 @@ def measure_distance():
 leds = [
     (PWM(Pin(0)), PWM(Pin(1)), PWM(Pin(2))),
     (PWM(Pin(3)), PWM(Pin(4)), PWM(Pin(5))),
-    (PWM(Pin(6)), PWM(Pin(7)), PWM(Pin(8))),
-    (PWM(Pin(9)), PWM(Pin(10)), PWM(Pin(11)))
+    (PWM(Pin(10)), PWM(Pin(11)), PWM(Pin(12))),
+    (PWM(Pin(13)), PWM(Pin(14)), PWM(Pin(15)))
 ]
 
 for r, g, b in leds:
@@ -58,8 +58,8 @@ while True:
     
     if distance < 10:  # Very close
         set_green()  # Set LEDs to green
-    elif distance < 50:  # Adjust threshold as needed
-        brightness = max(0, (50 - distance) * 2)  # Scale brightness based on distance
+    elif distance > 10:  # Adjust threshold as needed
+        brightness = max(2, (50 - distance) * 2)  # Scale brightness based on distance
         set_brightness(min(brightness, 100))  # Increase brightness with white color
     else:
         set_brightness(0)  # Off
